@@ -10,7 +10,18 @@ export class CurrModulService {
         private readonly currModulRepository: Repository<CurrModul>,
     ) {}
 
-    async findById(id: number): Promise<CurrModul | null> {
-        return this.currModulRepository.findOne({ where: { id } });
+    async getAvailableModules() {
+        return this.currModulRepository
+            .createQueryBuilder('cm')
+            .select([
+                'ce.curriculum AS curriculum',
+                'ce.estudis AS estudis',
+                'cm.sigles AS sigles',
+                'cm.nom AS nom'
+            ])
+            .innerJoin('curr_estudis', 'ce', 'cm.curriculum = ce.id')
+            .orderBy('ce.estudis', 'ASC')
+            .addOrderBy('cm.ordre', 'ASC')
+            .getRawMany();
     }
 }

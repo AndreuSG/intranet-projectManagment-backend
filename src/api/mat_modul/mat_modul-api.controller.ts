@@ -3,8 +3,9 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { MatModul } from 'src/domain/mat_modul/mat_modul.entity';
 import { MatModulsApiService } from './mat_modul-api.service';
+import { API_BASE } from 'src/shared/constants/API';
 
-@Controller('mat-moduls')
+@Controller(`${API_BASE}/mat-moduls`)
 export class MatModulApiController {
     constructor(private readonly matModulsApiService: MatModulsApiService) {}
 

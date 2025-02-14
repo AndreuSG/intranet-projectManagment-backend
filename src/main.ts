@@ -2,10 +2,26 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { LOG } from './shared/utils/log';
+import * as cors from 'cors';
+import * as morgan from 'morgan';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const port = process.env.PORT || 3000;
+  app.use(cors());
+  app.use(
+    morgan('common', {
+      skip: (req) =>
+        req.url.startsWith('/img') ||
+        req.url.startsWith('/css') ||
+        req.url.startsWith('/js') ||
+        req.url.startsWith('/fonts') ||
+        req.url.startsWith('/health'),
+      stream: {
+        write: (str) => LOG.log(str.trim()),
+      },
+    }),
+  );
 
   try {
     await app.listen(port);
