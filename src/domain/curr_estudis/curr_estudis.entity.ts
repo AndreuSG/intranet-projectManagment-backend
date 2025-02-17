@@ -1,6 +1,6 @@
 // src/domain/curr-estudis/entity/curr-estudis.entity.ts
 
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm';
 import { CurrModul } from '../curr_modul/curr_modul.entity';
 
 @Entity({ name: 'curr_estudis' })

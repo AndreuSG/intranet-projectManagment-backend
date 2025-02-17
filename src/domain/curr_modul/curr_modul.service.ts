@@ -14,6 +14,8 @@ export class CurrModulService {
         return this.currModulRepository
             .createQueryBuilder('cm')
             .select([
+                'cm.id AS idmodul',
+                'ce.id AS idcurriculum',
                 'ce.curriculum AS curriculum',
                 'ce.estudis AS estudis',
                 'cm.sigles AS sigles',

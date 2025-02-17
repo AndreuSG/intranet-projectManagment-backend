@@ -1,3 +1,4 @@
+import { CurrEstudis } from 'src/domain/curr_estudis/curr_estudis.entity';
 import { CurrModul } from 'src/domain/curr_modul/curr_modul.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
@@ -8,11 +9,9 @@ export class SelectedModul {
 
     @ManyToOne(() => CurrModul)
     @JoinColumn({ name: 'idmodul' })
-    idmodul: CurrModul;
+    idmodul: number;
 
-    @Column({ length: 100 })
-    nom_modul: string;
-
-    @Column({ length: 60 })
-    estudis: string;
+    @ManyToOne(() => CurrEstudis)
+    @JoinColumn({ name: 'idcurriculum' }) 
+    idcurriculum: number;
 }

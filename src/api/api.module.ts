@@ -4,8 +4,9 @@ import { AlumnApiModule } from './alumn/alumn-api.module';
 import { MatModulApiModule } from './mat_modul/mat_modul-api.module';
 import { CurrModulApiModule } from './curr_modul/curr_modul-api.module';
 import { CurrEstudisApiModule } from './curr_estudis/curr_estudis-api.module';
+import { SelectedModulsApiModule } from './selected_moduls/alumnes-selected-moduls-api.module';
 
 @Module({
-    imports: [AlumnApiModule, MatModulApiModule, CurrModulApiModule, CurrEstudisApiModule],
+    imports: [AlumnApiModule, MatModulApiModule, CurrModulApiModule, CurrEstudisApiModule, SelectedModulsApiModule],
 })
 export class ApiModule {}
