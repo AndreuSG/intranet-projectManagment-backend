@@ -7,11 +7,4 @@ import { Alumn } from 'src/domain/alumn/alumn.entity';
 export class AlumnApiService {
     constructor(private readonly alumnService: AlumnService) {}
 
-    create(dto: CreateAlumnDto): Promise<Alumn> {
-        return this.alumnService.create(dto);
-    }
-
-    findAll(): Promise<Alumn[]> {
-        return this.alumnService.findAll();
-    }
 }

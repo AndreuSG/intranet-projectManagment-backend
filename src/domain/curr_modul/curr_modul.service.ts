@@ -13,17 +13,18 @@ export class CurrModulService {
     async getAvailableModules() {
         return this.currModulRepository
             .createQueryBuilder('cm')
-            .select([
-                'cm.id AS idmodul',
-                'ce.id AS idcurriculum',
-                'ce.curriculum AS curriculum',
-                'ce.estudis AS estudis',
-                'cm.sigles AS sigles',
-                'cm.nom AS nom'
-            ])
+            .select([   'cm.id AS idmodul',
+                        'ce.id AS idcurriculum',
+                        'ce.curriculum AS curriculum',
+                        'ce.estudis AS estudis',
+                        'cm.sigles AS sigles',
+                        'cm.nom AS nom'])
             .innerJoin('curr_estudis', 'ce', 'cm.curriculum = ce.id')
+            .innerJoin('mat_moduls', 'mm', 'cm.id = mm.idmodul')
+            .innerJoin('mat_matricules', 'm', 'm.idnum = mm.idmat')
+            .distinct(true)
             .orderBy('ce.estudis', 'ASC')
             .addOrderBy('cm.ordre', 'ASC')
             .getRawMany();
-    }
+    }    
 }

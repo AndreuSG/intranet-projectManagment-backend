@@ -9,7 +9,6 @@ export class SelectedModulsApiController {
 
   @Post()
   async createModul(@Body() data: CreateSelectedModulDto[]) {
-    console.log(data);
     return this.selectedModulsApiService.createModul(data);
   }
 

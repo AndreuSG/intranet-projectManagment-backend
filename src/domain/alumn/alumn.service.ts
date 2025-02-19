@@ -11,16 +11,20 @@ export class AlumnService {
         private readonly alumnRepository: Repository<Alumn>,
     ) {}
 
-    async create(data: CreateAlumnDto): Promise<Alumn> {
-        const newAlumn = this.alumnRepository.create(data);
-        return this.alumnRepository.save(newAlumn);
+    async findAlumnesByModulAndCurr(idmodul: number, idcurriculum: number) {
+        return await this.alumnRepository
+            .createQueryBuilder('a')
+            .select([
+                'a.idalu AS idalu', 
+                'mm.idmodul AS idmodul', 
+                'm.curriculum AS idcurriculum', 
+                '1 AS active'
+            ])
+            .innerJoin('mat_matricules', 'm', 'm.idalu = a.idalu')
+            .innerJoin('mat_moduls', 'mm', 'mm.idmat = m.idnum')
+            .where('mm.idmodul = :idmodul', { idmodul })
+            .andWhere('m.curriculum = :idcurriculum', { idcurriculum })
+            .getRawMany();
     }
-
-    async findAll(): Promise<Alumn[]> {
-        return this.alumnRepository.find();
-    }
-
-    async findById(idalu: string): Promise<Alumn | null> {
-        return this.alumnRepository.findOne({ where: { idalu } });
-    }
+    
 }
