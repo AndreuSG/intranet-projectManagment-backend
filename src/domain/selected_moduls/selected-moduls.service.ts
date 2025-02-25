@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { SelectedModul } from './entity/selected-moduls.entity';
+import { SelectedModul } from './selected-moduls.entity';
 import { CreateSelectedModulDto } from './dto/create_selected_modul.dto';
 import { LOG } from 'src/shared/utils/log';
 import { AlumnesInSelectedModulsService } from '../alumnes_in_selected_moduls/alumnes-in-selected-moduls.service';

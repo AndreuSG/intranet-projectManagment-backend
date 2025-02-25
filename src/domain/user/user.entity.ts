@@ -1,5 +1,6 @@
+import { ProjectsCentre } from 'src/domain/centre_projects/centre_projects.entity';
 import { USER_ROLE } from 'src/shared/enums/user.role';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity({ name: 'usuaris' })
 export class User {
@@ -29,4 +30,8 @@ export class User {
 
   @Column({ length: 45 })
   cognoms: string;
+
+  @OneToMany(() => ProjectsCentre, (projecte) => projecte.creatPer)
+  projectes: ProjectsCentre[];
+
 }

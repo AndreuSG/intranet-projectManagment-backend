@@ -1,7 +1,8 @@
 import { Alumn } from 'src/domain/alumn/alumn.entity';
+import { ProjectsAlumn } from 'src/domain/projects_alumn/projects_alumn.entity';
 import { CurrEstudis } from 'src/domain/curr_estudis/curr_estudis.entity';
-import { SelectedModul } from 'src/domain/selected_moduls/entity/selected-moduls.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { SelectedModul } from 'src/domain/selected_moduls/selected-moduls.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany } from 'typeorm';
 
 @Entity('alumnes_in_selected_moduls')
 export class AlumnesInSelectedModuls {
@@ -22,4 +23,7 @@ export class AlumnesInSelectedModuls {
 
     @Column({ default: true })
     active: boolean;
+
+    @ManyToMany(() => ProjectsAlumn, (projecte) => projecte.alumnesAssignats)
+    projectes: ProjectsAlumn[];
 }

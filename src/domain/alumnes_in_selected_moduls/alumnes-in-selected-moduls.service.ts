@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { LOG } from 'src/shared/utils/log';
-import { AlumnesInSelectedModuls } from './entity/alumnes-selected-moduls.entity';
+import { AlumnesInSelectedModuls } from './alumnes-in-selected-moduls.entity';
 import { AlumnService } from '../alumn/alumn.service';
 
 @Injectable()
@@ -82,5 +82,9 @@ export class AlumnesInSelectedModulsService {
             { idalu: In(idalus) },
             { active: false },
         );
+    }
+
+    async findByIds(ids: number[]) {
+        return await this.alumnesInSelectedModulsRepository.findBy({ id: In (ids)});
     }
 }

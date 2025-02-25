@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from '@nestjs/common/exceptions';
 import { Repository } from 'typeorm/repository/Repository';
-import { User } from './entity/user.entity';
+import { User } from './user.entity';
 import { USER_ROLE } from 'src/shared/enums/user.role';
 
 @Injectable()
