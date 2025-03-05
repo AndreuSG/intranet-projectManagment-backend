@@ -1,6 +1,7 @@
 import { ProjectsCentre } from 'src/domain/projects/centre_projects/centre_projects.entity';
 import { USER_ROLE } from 'src/shared/enums/user.role';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { GroupStudy } from '../group_study/group_study.entity';
 
 @Entity({ name: 'usuaris' })
 export class User {
@@ -34,4 +35,6 @@ export class User {
   @OneToMany(() => ProjectsCentre, (projecte) => projecte.creatPer)
   projectes: ProjectsCentre[];
 
+  @OneToMany(() => GroupStudy, (groupStudy) => groupStudy.user)
+  groupStudies: GroupStudy[];
 }

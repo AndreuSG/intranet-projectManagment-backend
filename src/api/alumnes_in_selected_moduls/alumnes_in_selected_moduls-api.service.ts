@@ -9,6 +9,10 @@ export class AlumnesInSelectedModulsApiService {
         return await this.alumnesInSelectedModulsService.getAllStudents();
     }
 
+    async getStudentsByModul(study: string) {
+        return await this.alumnesInSelectedModulsService.getStudentsByModul(study);
+    }
+
     async unsubscribe(idalus: string[]) {
         return await this.alumnesInSelectedModulsService.unsubscribe(idalus);
     }

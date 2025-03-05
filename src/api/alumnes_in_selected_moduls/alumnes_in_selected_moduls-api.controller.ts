@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { API_BASE } from 'src/shared/constants/API';
 import { AlumnesInSelectedModulsApiService } from './alumnes_in_selected_moduls-api.service';
 import { UnsubscribeStudentsDto } from 'src/domain/alumnes_in_selected_moduls/dto/unsubscribe-students.dto';
@@ -16,6 +16,11 @@ export class AlumnesInSelectedModulsApiController {
     @Get()
     async getAllStudents() {
         return await this.alumnesInSelectedModulsApiService.getAllStudents();
+    }
+
+    @Get("study/:study")
+    async getStudentsByModul(@Param('study') study: string) {
+        return await this.alumnesInSelectedModulsApiService.getStudentsByModul(study);
     }
 
     @Put('unsubscribe')

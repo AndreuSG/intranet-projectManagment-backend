@@ -64,6 +64,7 @@ export class AlumnesInSelectedModulsService {
         return await this.alumnesInSelectedModulsRepository
             .createQueryBuilder('ais')
             .select([
+                'ais.id AS id',
                 'a.idalu AS idalu',
                 "CONCAT(a.cognoms_alumne, ', ', a.nom_alumne) AS nom_complet",
                 "CONCAT(a.idsapa, '@sapalomera.cat') AS email",
@@ -86,5 +87,24 @@ export class AlumnesInSelectedModulsService {
 
     async findByIds(ids: number[]) {
         return await this.alumnesInSelectedModulsRepository.findBy({ id: In (ids)});
+    }
+
+    async getStudentsByModul(study: string) {
+        return await this.alumnesInSelectedModulsRepository
+            .createQueryBuilder('ais')
+            .select([
+                'ais.id AS id',
+                'a.idalu AS idalu',
+                "CONCAT(a.cognoms_alumne, ', ', a.nom_alumne) AS nom_complet",
+                "CONCAT(a.idsapa, '@sapalomera.cat') AS email",
+                'ce.estudis AS estudis'
+            ])
+            .innerJoin('alumnes', 'a', 'ais.idalu = a.idalu')
+            .innerJoin('curr_estudis', 'ce', 'ais.idcurriculum = ce.id')
+            .where('ais.active = :active', { active: true })
+            .andWhere('ce.estudis = :estudis', { estudis: study })
+            .orderBy('ce.estudis', 'ASC')
+            .addOrderBy('a.cognoms_alumne', 'ASC')
+            .getRawMany();
     }
 }
