@@ -1,4 +1,4 @@
-import { ProjectsCentre } from 'src/domain/centre_projects/centre_projects.entity';
+import { ProjectsCentre } from 'src/domain/projects/centre_projects/centre_projects.entity';
 import { USER_ROLE } from 'src/shared/enums/user.role';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 

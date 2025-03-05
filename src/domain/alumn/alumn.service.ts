@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Alumn } from './alumn.entity';
-import { CreateAlumnDto } from './dto/create-alumn.dto';
 
 @Injectable()
 export class AlumnService {
@@ -26,5 +25,4 @@ export class AlumnService {
             .andWhere('m.curriculum = :idcurriculum', { idcurriculum })
             .getRawMany();
     }
-    
 }

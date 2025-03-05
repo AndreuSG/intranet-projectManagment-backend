@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProjectsAlumn } from './projects_alumn.entity';
-import { AlumnesInSelectedModulsService } from '../alumnes_in_selected_moduls/alumnes-in-selected-moduls.service';
+import { AlumnesInSelectedModulsService } from '../../alumnes_in_selected_moduls/alumnes-in-selected-moduls.service';
 
 @Injectable()
 export class ProjectsAlumnService {

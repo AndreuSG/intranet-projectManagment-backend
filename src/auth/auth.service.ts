@@ -23,7 +23,6 @@ export class AuthService {
             throw new Error('User not found');
         }
 
-        // 3. Generar JWT propio con datos locales (id, role, etc)
         const tokenPayload = {
             id: user.id,
             username: user.usuari,

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { ProjectsCentre } from '../centre_projects/centre_projects.entity';
+import { ProjectsCentre } from '../projects/centre_projects/centre_projects.entity';
 
 @Entity({ name: 'attachments' })
 export class Attachment {

@@ -16,9 +16,4 @@ export class CurrEstudisApiController {
     async findOne(@Param('id') id: number): Promise<CurrEstudis | null> {
         return this.currEstudisApiService.findById(id);
     }
-
-    @Get()
-    async hello(): Promise<string> {
-        return 'Hello World!';
-    }
 }

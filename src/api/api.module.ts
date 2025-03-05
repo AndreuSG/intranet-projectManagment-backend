@@ -8,8 +8,22 @@ import { SelectedModulsApiModule } from './selected_moduls/selected-moduls-api.m
 import { AlumnesInSelectedModulsApiModule } from './alumnes_in_selected_moduls/alumnes_in_selected_moduls-api.module';
 import { ProjectsApiModule } from './projects/projects-api.module';
 import { AttachmentApiModule } from './attachment/attachment-api.module';
+import { StudyApiModule } from './study/study-api.module';
+import { GroupStudyApiModule } from './group_study/group_study-api.module';
 
 @Module({
-    imports: [AlumnApiModule, MatModulApiModule, CurrModulApiModule, CurrEstudisApiModule, SelectedModulsApiModule, AlumnesInSelectedModulsApiModule, ProjectsApiModule, AttachmentApiModule],
+    imports: [
+        AlumnApiModule, 
+        MatModulApiModule, 
+        CurrModulApiModule, 
+        CurrEstudisApiModule, 
+        SelectedModulsApiModule, 
+        AlumnesInSelectedModulsApiModule, 
+        ProjectsApiModule, 
+        AttachmentApiModule,
+        StudyApiModule,
+        GroupStudyApiModule,
+    ],
+
 })
 export class ApiModule {}
