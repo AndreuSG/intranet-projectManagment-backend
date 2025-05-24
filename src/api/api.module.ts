@@ -10,6 +10,10 @@ import { ProjectsApiModule } from './projects/projects-api.module';
 import { AttachmentApiModule } from './attachment/attachment-api.module';
 import { StudyApiModule } from './study/study-api.module';
 import { GroupStudyApiModule } from './group_study/group_study-api.module';
+import { RubricCoursesApiModule } from './rubrics/rubric-courses/rubric-courses-api.module';
+import { RubricApiModule } from './rubrics/rubric-api.module';
+import { RubricCriterionApiModule } from './rubric-criterion/rubric-criterion-api.module';
+import { RubricLevelApiModule } from './rubric-level/rubric-level-api.module';
 
 @Module({
     imports: [
@@ -23,6 +27,9 @@ import { GroupStudyApiModule } from './group_study/group_study-api.module';
         AttachmentApiModule,
         StudyApiModule,
         GroupStudyApiModule,
+        RubricApiModule,
+        RubricCriterionApiModule,
+        RubricLevelApiModule
     ],
 
 })
