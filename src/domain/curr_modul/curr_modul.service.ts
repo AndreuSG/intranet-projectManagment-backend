@@ -18,7 +18,8 @@ export class CurrModulService {
                         'ce.curriculum AS curriculum',
                         'ce.estudis AS estudis',
                         'cm.sigles AS sigles',
-                        'cm.nom AS nom'])
+                        'cm.nom AS nom',
+                        'cm.curs AS curs'])
             .innerJoin('curr_estudis', 'ce', 'cm.curriculum = ce.id')
             .innerJoin('mat_moduls', 'mm', 'cm.id = mm.idmodul')
             .innerJoin('mat_matricules', 'm', 'm.idnum = mm.idmat')

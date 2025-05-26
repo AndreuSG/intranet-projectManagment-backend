@@ -10,6 +10,10 @@ import { ProjectsApiModule } from './projects/projects-api.module';
 import { AttachmentApiModule } from './attachment/attachment-api.module';
 import { StudyApiModule } from './study/study-api.module';
 import { GroupStudyApiModule } from './group_study/group_study-api.module';
+import { ConfigApiModule } from './config/config-api.module';
+import { CursGrupApiModule } from './curs_grup/curs_grup-api.module';
+import { DatesModulProjectesApiModule } from './dates_modul_projectes/dates_modul_projectes-api.module';
+import { ScheduleModule } from './schedule/schedule.module';
 
 @Module({
     imports: [
@@ -23,6 +27,10 @@ import { GroupStudyApiModule } from './group_study/group_study-api.module';
         AttachmentApiModule,
         StudyApiModule,
         GroupStudyApiModule,
+        ConfigApiModule,
+        CursGrupApiModule,
+        DatesModulProjectesApiModule,
+        ScheduleModule,
     ],
 
 })

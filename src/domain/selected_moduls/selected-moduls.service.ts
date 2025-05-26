@@ -16,23 +16,23 @@ export class SelectedModulsService {
     ) {}
     
     async createModul(data: CreateSelectedModulDto[]) {
-        const existingModuls = await this.findAll();
+        const existingModuls = await this.findAll().then(res => res.map(m => ({ idmodul: m.idmodul, idcurriculum: m.idcurriculum, curs: m.course })));
     
-        const existingSet = new Set(existingModuls.map(m => `${m.idmodul}-${m.idcurriculum}`));
-        const newSet = new Set(data.map(m => `${m.idmodul}-${m.idcurriculum}`));
+        const existingSet = new Set(existingModuls.map(m => `${m.idmodul}-${m.idcurriculum}-${m.curs}`));
+        const newSet = new Set(data.map(m => `${m.idmodul}-${m.idcurriculum}-${m.course}`));
     
         const toDelete = existingModuls
-            .filter(m => !newSet.has(`${m.idmodul}-${m.idcurriculum}`))
-            .map(m => ({ idmodul: m.idmodul, idcurriculum: m.idcurriculum }));
+            .filter(m => !newSet.has(`${m.idmodul}-${m.idcurriculum}-${m.curs}`))
+            .map(m => ({ idmodul: m.idmodul, idcurriculum: m.idcurriculum, curs: m.curs }));
     
-        const toInsert = data.filter(m => !existingSet.has(`${m.idmodul}-${m.idcurriculum}`));
+        const toInsert = data.map(m => ({ idmodul: m.idmodul, idcurriculum: m.idcurriculum, curs: m.course })).filter(m => !existingSet.has(`${m.idmodul}-${m.idcurriculum}-${m.curs}`));
     
         if (toDelete.length > 0) {
             await this.selectedModulsRepository
                 .createQueryBuilder()
                 .delete()
                 .where(
-                    toDelete.map(m => `idmodul = ${m.idmodul} AND idcurriculum = ${m.idcurriculum}`).join(' OR ')
+                    toDelete.map(m => `idmodul = ${m.idmodul} AND idcurriculum = ${m.idcurriculum} AND curs = '${m.curs}'`).join(' OR ')
                 )
                 .execute();
                 await this.alumnesInSelectedModulsService.removeAlumnesFromModuls(toDelete);
@@ -55,6 +55,7 @@ export class SelectedModulsService {
             .select([
                 'selectedModul.idmodul AS idmodul',
                 'selectedModul.idcurriculum AS idcurriculum',
+                'selectedModul.curs AS course'
             ])
             .leftJoin('selectedModul.idmodul', 'currModul')
             .leftJoin('selectedModul.idcurriculum', 'currEstudis')
