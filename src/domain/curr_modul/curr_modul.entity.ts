@@ -11,6 +11,12 @@ export class CurrModul {
     @Column({ length: 100 })
     nom: string;
 
+    @Column({ length: 10 })
+    sigles: string;
+
+    @Column()
+    curs: number;
+
     @Column()
     ordre: number;
 

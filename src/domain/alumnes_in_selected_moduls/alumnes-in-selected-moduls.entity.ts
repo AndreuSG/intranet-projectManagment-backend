@@ -21,6 +21,9 @@ export class AlumnesInSelectedModuls {
     @JoinColumn({ name: 'idcurriculum' })
     idcurriculum: CurrEstudis;
 
+    @Column()
+    curs: string;
+
     @Column({ default: true })
     active: boolean;
 
