@@ -13,9 +13,9 @@ export class AlumnesInSelectedModulsService {
         private readonly alumnService: AlumnService,
     ) {}
 
-    async insertAlumnesForModuls(moduls: { idmodul: number; idcurriculum: number }[]) {
+    async insertAlumnesForModuls(moduls: { idmodul: number; idcurriculum: number, curs: string }[]) {
         for (const modul of moduls) {
-            const alumnes = await this.alumnService.findAlumnesByModulAndCurr(modul.idmodul, modul.idcurriculum);
+            const alumnes = await this.alumnService.findAlumnesByModulAndCurr(modul.idmodul, modul.idcurriculum, modul.curs);
 
             console.log('Alumnes:', alumnes);
 
@@ -25,7 +25,7 @@ export class AlumnesInSelectedModulsService {
             };
 
             const existingAlumnes = await this.alumnesInSelectedModulsRepository.find({
-                where: { idmodul: { id: modul.idmodul }, idcurriculum: { id: modul.idcurriculum } }
+                where: { idmodul: { id: modul.idmodul }, idcurriculum: { id: modul.idcurriculum }, curs: modul.curs }
             });
 
             const existingSet = new Set(existingAlumnes.map(a => a.idalu));
@@ -36,27 +36,29 @@ export class AlumnesInSelectedModulsService {
                     idalu: a.idalu,
                     idmodul: { id: modul.idmodul },
                     idcurriculum: { id: modul.idcurriculum }, 
+                    curs: modul.curs,
                     active: true,
                 }));
 
             if (newAlumnes.length > 0) {
                 await this.alumnesInSelectedModulsRepository.save(newAlumnes);
-                LOG.log(`Inserted ${newAlumnes.length} alumnes for modul ${modul.idmodul} and curriculum ${modul.idcurriculum}`);
+                LOG.log(`Inserted ${newAlumnes.length} alumnes for modul ${modul.idmodul} and curriculum ${modul.idcurriculum} and curs ${modul.curs}`);
             }
         }
     }
 
     
-    async removeAlumnesFromModuls(moduls: { idmodul: number; idcurriculum: number }[]) {
+    async removeAlumnesFromModuls(moduls: { idmodul: number; idcurriculum: number, curs: string }[]) {
         for (const modul of moduls) {
             await this.alumnesInSelectedModulsRepository
                 .createQueryBuilder()
                 .delete()
                 .where('idmodul = :idmodul', { idmodul: modul.idmodul })
                 .andWhere('idcurriculum = :idcurriculum', { idcurriculum: modul.idcurriculum })
+                .andWhere('curs = :curs', { curs: modul.curs })
                 .execute();
 
-            LOG.log(`Removed alumnes for modul ${modul.idmodul}`);
+            LOG.log(`Removed alumnes for modul ${modul.idmodul} and curriculum ${modul.idcurriculum} and curs ${modul.curs}`);
         }
     }
 
@@ -68,10 +70,12 @@ export class AlumnesInSelectedModulsService {
                 'a.idalu AS idalu',
                 "CONCAT(a.cognoms_alumne, ', ', a.nom_alumne) AS nom_complet",
                 "CONCAT(a.idsapa, '@sapalomera.cat') AS email",
-                'ce.estudis AS estudis'
+                'ce.estudis AS estudis',
+                'cg.id AS course'
             ])
             .innerJoin('alumnes', 'a', 'ais.idalu = a.idalu')
             .innerJoin('curr_estudis', 'ce', 'ais.idcurriculum = ce.id')
+            .innerJoin('cursos_grups', 'cg', 'ais.curs = cg.id')
             .where('ais.active = :active', { active: true })
             .orderBy('ce.estudis', 'ASC')
             .addOrderBy('a.cognoms_alumne', 'ASC')

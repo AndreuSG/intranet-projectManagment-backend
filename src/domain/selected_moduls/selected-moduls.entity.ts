@@ -14,4 +14,7 @@ export class SelectedModul {
     @ManyToOne(() => CurrEstudis)
     @JoinColumn({ name: 'idcurriculum' }) 
     idcurriculum: number;
+
+    @Column()
+    curs: string;
 }
