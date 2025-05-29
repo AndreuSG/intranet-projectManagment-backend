@@ -18,6 +18,7 @@ import { RubricCoursesApiModule } from './rubrics/rubric-courses/rubric-courses-
 import { RubricApiModule } from './rubrics/rubric-api.module';
 import { RubricCriterionApiModule } from './rubric-criterion/rubric-criterion-api.module';
 import { RubricLevelApiModule } from './rubric-level/rubric-level-api.module';
+import { CalendarEventsApiModule } from './calendar-event/calendar-events-api.module';
 
 
 @Module({
@@ -38,7 +39,8 @@ import { RubricLevelApiModule } from './rubric-level/rubric-level-api.module';
         ScheduleModule,
         RubricApiModule,
         RubricCriterionApiModule,
-        RubricLevelApiModule
+        RubricLevelApiModule,
+        CalendarEventsApiModule
     ],
 
 })

@@ -18,8 +18,4 @@ export class CreateCalendarEventDto {
     @IsOptional()
     @IsString()
     color?: string;
-
-    @IsArray()
-    @IsString({ each: true })
-    group_ids: string[];
 }

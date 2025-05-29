@@ -1,9 +1,11 @@
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CalendarEvent } from './calendar-event.entity';
-import { GroupStudy } from '../group_study/group_study.entity';
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CalendarEventsService } from './calendar-event.service';
+import { CalendarEvent } from './calendar-event.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([CalendarEvent, GroupStudy])],
+    imports: [TypeOrmModule.forFeature([CalendarEvent])],
+    providers: [CalendarEventsService],
+    exports: [CalendarEventsService],
 })
-export class CalendarModule {}
+export class CalendarEventsModule {}

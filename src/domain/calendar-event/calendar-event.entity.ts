@@ -4,8 +4,6 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
-    ManyToMany,
-    JoinTable,
 } from 'typeorm';
 import { GroupStudy } from '../group_study/group_study.entity';
 
@@ -28,18 +26,4 @@ export class CalendarEvent {
 
     @Column({ type: 'varchar', length: 20, nullable: true })
     color?: string;
-
-    @ManyToMany(() => GroupStudy)
-    @JoinTable({
-        name: 'calendar_event_groups',
-        joinColumn: { name: 'event_id', referencedColumnName: 'id' },
-        inverseJoinColumn: { name: 'group_id', referencedColumnName: 'id' },
-    })
-    groups: GroupStudy[];
-
-    @CreateDateColumn({ type: 'timestamp' })
-    created_at: Date;
-
-    @UpdateDateColumn({ type: 'timestamp' })
-    updated_at: Date;
 }
